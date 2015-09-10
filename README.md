@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Arigue
 > A simple DevOps Platform developing by Python Web Framework Django and Bootstrap.
 
@@ -39,3 +40,7 @@
 ![image](https://raw.githubusercontent.com/Keleir/IMGDB/master/Arigue/Index.png "Index View")
 #### Serer View
 ![image](https://raw.githubusercontent.com/Keleir/IMGDB/master/Arigue/Server.png "Server View")
+=======
+# Arigue_v2.0
+A simple DevOps Platform developing by Python Web Framework Django and Bootstrap.
+>>>>>>> 67ce5bd79966be6737f962453688114636fa125c
