@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# Arigue
+
+# Arigue_v1.0
 > A simple DevOps Platform developing by Python Web Framework Django and Bootstrap.
 
 ## File Arch
