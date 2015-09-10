@@ -1,0 +1,81 @@
+{% extends 'base.html'%}
+
+{% block page-content %}
+
+        <div class="col-sm-9  col-md-10 col-md-offset-1 main">
+          <h1 class="page-header">Server Manager</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="/static/imgs/system-analytics-icon.png" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <!-- <span class="text-muted">Something else</span> -->
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="/static/imgs/analytics-icon.png" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+             <!--  <span class="text-muted">Something else</span> -->
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="/static/imgs/attach-1.png" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <!-- <span class="text-muted">Something else</span> -->
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="/static/imgs/cloud.png" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <!-- <span class="text-muted">Something else</span> -->
+            </div>
+          </div>
+
+          <h2 class="sub-header">Server List</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Host Name</th>
+                  <th>IP Address</th>
+                  <th>System Information</th>
+                  <th>Memory Free</th>
+                  <th>Memory Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for server in perPage.object_list %}
+              {% if forloop.counter0|divisibleby:2 %}
+            	<tr class="success">
+            	{% else %}
+            	<tr class="warning">
+            	{% endif %}
+                  <td>{{server.hostname}}</td>
+                  <td>{{server.ipaddr}}</td>
+                  <td>{{server.sysinfo}}</td>
+                  <td>{{server.mem_free}}</td>
+                  <td>{{server.mem_total}}</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+
+            <!-- Pagination ==================================================Start  -->
+             {% if perPage.has_next %}
+            		<button type="button" class="btn btn-sm btn-default pull-right"><a href="?page={{perPage.next_page_number}}">Next</a></button>
+            	{% else %}
+            		<span class='empty'></span>
+        	{% endif %}
+        	
+             <button type="button" class="btn btn-sm btn-default pull-right">{{ perPage.number }}</button>
+
+             {% if perPage.has_previous %}
+           		 <button type="button" class="btn btn-sm btn-default pull-right"><a href="?page={{ perPage.previous_page_number }}">Prev</a></button>
+           	{% else %}
+           		<span class='empty'></span>
+        	{% endif %}
+            <!-- Pagination ==================================================End -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
