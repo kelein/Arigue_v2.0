@@ -30,16 +30,6 @@ def asset(request):
 def homepage(request):
 	return render_to_response('homepage.html', {})
 
-# Define form model
-class UserForm(forms.Form):
-	nickname = forms.CharField(label='nickname: ', max_length=10)
-	email = forms.EmailField(label='Email: ')
-	password = forms.CharField(label='Password: ', widget=forms.PasswordInput())
-	jobstate = forms.BooleanField(label='Jobstate: ')
-	school = forms.CharField(max_length=30)
-	job = forms.ChoiceField(label='Job: ', widget=forms.Select())
-	userimg = forms.FileField(label='User Image: ', widget=forms.FileInput)	
-
 
 # profile view
 # Kallen Ding, Agu 31 2015
@@ -82,23 +72,25 @@ def arigue(request):
 
 # login view
 def login(request):
-	# print request.POST.get('username')
-	# print request.POST.get('password')
-
-	username = request.POST.get('username')
-	password = request.POST.get('password')
-	user = auth.authenticate(username=username, password=password)
-  	
-  	if user is not None:
-		auth.login(request, user)
-  		return HttpResponseRedirect('/dashboard')
+	if request.method == 'POST':
+		uf = UserForm(request.POST)
+		if uf.is_valid():
+			username = uf.cleaned_data['username']
+			password = uf.cleaned_data['password']
+			md5pwd = md5(password)
+			print username, md5pwd
+			user = Profile.objects.filter(username__exact=username, password__exact=md5pwd)
+  			if user:
+				request.session['username'] = username
+				return HttpResponseRedirect('/index/')
   	else:
-		return render_to_response('index.html', {'login err': 'Wrong username or password'})		
+		uf = UserForm()
+	return render_to_response('login.html', {'uf': uf})		
 
 
 # logout view
 def logout(request):
-	return render_to_response('login.html', {})
+	return HttpResponseRedirect('/login/')
 
 # Dashboard view
 def dashboard(request):
@@ -132,3 +124,29 @@ def server(request):
 		perPage = paginator.page(pageCount)	
 	
 	return render_to_response('server.html', {'perPage': perPage})
+
+# Define UserForm model
+class UserForm(forms.Form):
+	username = forms.CharField(label='',
+		widget=forms.TextInput(attrs={
+			'class': 'form-control',
+			'outline': 'none', 
+			'placeholder': 'Username'
+		})
+	)
+	# username = forms.CharField(widget=forms.TextInput)
+	password = forms.CharField(
+		widget=forms.PasswordInput(attrs={
+			'class': 'form-control',
+			'placeholder': 'Password'
+		})
+	)
+
+
+# Use md5 to screct the user's password
+# Just import the md5 module of python.
+def md5(string):
+	import hashlib
+	m = hashlib.md5()
+	m.update(string)
+	return m.hexdigest()

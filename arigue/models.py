@@ -14,10 +14,10 @@ class Server(models.Model):
 
 # Profile Class
 class Profile(models.Model):
-	nickname = models.CharField(max_length=10, unique=True)
+	username = models.CharField(max_length=10, unique=True)
 	email = models.EmailField(max_length=20)
-	password = models.CharField(max_length=30)
+	password = models.CharField(max_length=50)
 	jobstate = models.BooleanField()
 	school = models.CharField(max_length=30)
 	job = models.CharField(max_length=30) 
-	userimg = models.FileField(upload_to='./upload', max_length=30)
+	userimg = models.FileField(upload_to='avatar/%Y%m%d/', max_length=100)

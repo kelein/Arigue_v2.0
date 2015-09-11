@@ -2,7 +2,6 @@
 
 {% block page-content %}
 
-        <div class="col-sm-9  col-md-10 col-md-offset-1 main">
           <h1 class="page-header">Server Manager</h1>
 
           <div class="row placeholders">
@@ -59,7 +58,7 @@
 
             <!-- Pagination ==================================================Start  -->
              {% if perPage.has_next %}
-            		<button type="button" class="btn btn-sm btn-default pull-right"><a href="?page={{perPage.next_page_number}}">Next</a></button>
+            		<a class="btn btn-sm btn-default pull-right" href="?page={{perPage.next_page_number}}">Next</a>
             	{% else %}
             		<span class='empty'></span>
         	{% endif %}
@@ -67,7 +66,7 @@
              <button type="button" class="btn btn-sm btn-default pull-right">{{ perPage.number }}</button>
 
              {% if perPage.has_previous %}
-           		 <button type="button" class="btn btn-sm btn-default pull-right"><a href="?page={{ perPage.previous_page_number }}">Prev</a></button>
+           		 <a class="btn btn-sm btn-default pull-right" href="?page={{ perPage.previous_page_number }}">Prev</a>
            	{% else %}
            		<span class='empty'></span>
         	{% endif %}
@@ -76,6 +75,5 @@
           </div>
         </div>
       </div>
-    </div>
 
 {% endblock %}
