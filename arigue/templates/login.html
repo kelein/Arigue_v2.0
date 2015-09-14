@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link rel="icon" href="/favicon.ico">
 
     <title>Login</title>
 
@@ -31,7 +31,7 @@
     <div class="container">
 
         <form class="form-signin" method="post" action="/login">
-              <h2 class="form-signin-heading page-header">DevOps Platform</h2>
+              <h2 class="form-signin-heading page-header">Welcome to Arigue</h2>
               <!-- 
               <label for="inputusername" class="sr-only">用户名</label>
                     <input type="username" id="input" class="form-control" placeholder="Username" required="" autofocus="">
@@ -46,7 +46,8 @@
                <!-- {{ uf.as_p }} -->
 
               {% for field in uf %}
-              <div class="panel panel-default panel-body">
+              <!-- <div class="panel panel-default panel-body"> -->
+              <div>
               {{ field }}
               {{ field.error.msg }}
               </div>

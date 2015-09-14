@@ -5,8 +5,8 @@ from arigue.views import *
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 	
-	url(r'^index/', 'arigue.views.index'),
-	url(r'^$', 'arigue.views.index'),
+	url(r'^index/', index),
+	url(r'^$', login),
 	url(r'^arigue', arigue),
 	url(r'^dashboard', dashboard),
 	url(r'^server', server),

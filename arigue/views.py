@@ -16,19 +16,23 @@ def base(request):
 
 # monitor view
 def monitor(request):
+	username = request.session.get('username', '')
 	cmdstr = 'free'
 	# output = os.system(cmdstr)
 	output = os.popen(cmdstr)
 	arch = output.read()
-	return render_to_response('monitor.html', {'arch': arch})
+	return render_to_response('monitor.html', {'arch': arch, 'username': username})
+
 
 # assets view
 def asset(request):
-	return render_to_response('asset.html', {})
+	username = request.session.get('username', '')
+	return render_to_response('asset.html', {'username': username})
 
 # homepage view
 def homepage(request):
-	return render_to_response('homepage.html', {})
+	username = request.session.get('username', '')
+	return render_to_response('homepage.html', {'username': username})
 
 
 # profile view
@@ -62,12 +66,14 @@ def profile(request):
 
 # index view 
 def index(request):
- 	t = loader.get_template('index.html')	
-	return HttpResponse(t.render())
+	username = request.session.get('username', '')
+	return render_to_response('index.html', {'username': username})
+
 
 # arigue view
 def arigue(request):
-	return render_to_response('index.html', {})
+	username = request.session.get('username', '')
+	return render_to_response('index.html', {'username': username})	
 
 
 # login view
@@ -90,15 +96,21 @@ def login(request):
 
 # logout view
 def logout(request):
+	# Delete session when user logout
+	del request.session['username']
 	return HttpResponseRedirect('/login/')
+
 
 # Dashboard view
 def dashboard(request):
-	return render_to_response('dashboard.html', {'user': request.user})
+	username = request.session.get('username', '')
+	return render_to_response('dashboard.html', {'username': username})
+
 
 # Server manager view
 def server(request):
-  	t = loader.get_template('server.html')
+  	username = request.session.get('username', '')
+	t = loader.get_template('server.html')
 	# Get all objects in model Server
 	allServers = Server.objects.all()
 	# Records of each page
@@ -123,14 +135,14 @@ def server(request):
 	except (EmptyPage, InvaildPage):
 		perPage = paginator.page(pageCount)	
 	
-	return render_to_response('server.html', {'perPage': perPage})
+	return render_to_response('server.html', {'perPage': perPage, 'username': username})
+
 
 # Define UserForm model
 class UserForm(forms.Form):
 	username = forms.CharField(label='',
 		widget=forms.TextInput(attrs={
 			'class': 'form-control',
-			'outline': 'none', 
 			'placeholder': 'Username'
 		})
 	)
