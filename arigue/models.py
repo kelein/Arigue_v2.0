@@ -11,6 +11,12 @@ class Server(models.Model):
    	kernal = models.CharField(max_length=50) 	
 	mem_total = models.IntegerField() 
 	mem_free = models.IntegerField() 
+	
+	# def __unicode__(self):
+	#	return self.ipaddr
+	
+	def __str__(self):
+		return '%s, %s' % (self.hostname, self.ipaddr)
 
 # Profile Class
 class Profile(models.Model):
@@ -21,3 +27,6 @@ class Profile(models.Model):
 	school = models.CharField(max_length=30)
 	job = models.CharField(max_length=30) 
 	userimg = models.FileField(upload_to='avatar/%Y%m%d/', max_length=100)
+
+	def __unicode__(self):
+		return self.username

@@ -28,6 +28,18 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+<!-- Custom Script Function -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('nav nav-sidebar > li').click(function(e) {
+            e.preventDefault();
+            $('ul.nav-sidebar > li').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+</script>
+
   </head>
 
   <body>
@@ -78,11 +90,11 @@
       <!-- Sidebar-Start ============================================== -->
       <div class="col-sm-2 col-md-2 sidebar">
       
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="/index"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
-            <li><a href="/dashboard"><span class="glyphicon glyphicon-th"></span> 控制面板</a></li>
-            <li><a href="/server"><span class="glyphicon glyphicon-tasks"></span> 主机管理</a></li>
-            <li><a href="/asset"><span class="glyphicon glyphicon-hdd"></span> 资产管理</a></li>
+          <ul class="nav nav-sidebar" id="sidebar">
+            <li class="active"><a href="/index" role="li" data-toggle="li"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+            <li><a href="/dashboard" role="li" data-toggle="li"><span class="glyphicon glyphicon-th"></span> 控制面板</a></li>
+            <li><a href="/server" role="li" data-toggle="li"><span class="glyphicon glyphicon-tasks"></span> 主机管理</a></li>
+            <li><a href="/asset" role="li" data-toggle="li"><span class="glyphicon glyphicon-hdd"></span> 资产管理</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href=""><span class="glyphicon glyphicon-level-up"></span> 配置中心</a></li>
@@ -114,6 +126,10 @@
 
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
+
+
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

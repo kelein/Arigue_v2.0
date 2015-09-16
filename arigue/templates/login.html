@@ -51,8 +51,15 @@
               {{ field }}
               {{ field.error.msg }}
               </div>
-              {% endfor %}
-              
+             {% endfor %}
+
+              {% if uf.errors %}
+                    <div class="alert alert-warning alert-dismissable" role="alert">
+                    Username or Password Error !  
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    </div>
+              {% endif %}
+
               <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         </form>
 
