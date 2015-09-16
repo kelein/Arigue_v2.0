@@ -140,18 +140,48 @@ def server(request):
 
 # Define UserForm model
 class UserForm(forms.Form):
-	username = forms.CharField(label='',
-		widget=forms.TextInput(attrs={
+	username = forms.CharField(
+		required = True,
+		error_messages = {'required': u'Please input username.'},
+		widget = forms.TextInput(attrs={
 			'class': 'form-control',
 			'placeholder': 'Username'
 		})
 	)
 	# username = forms.CharField(widget=forms.TextInput)
 	password = forms.CharField(
-		widget=forms.PasswordInput(attrs={
+		widget = forms.PasswordInput(attrs={
 			'class': 'form-control',
 			'placeholder': 'Password'
 		})
+	)
+
+
+# Define ChpwdForm Model
+class ChpwdForm(forms.Form):
+	oldPwd = forms.CharField(
+		required = True,
+		label = u"Old Password",
+		error_messages = {'required': u'Please input old password.'},
+		widget = forms.PasswordInput(attrs = {
+			'placeholder': 'Old-Password',	
+		}), 		
+	)
+	newPwd = forms.CharField(
+		required = True,
+		label = u"New Passwrd",
+		error_messages = {'required': u'Please input new password.'},
+		widget = forms.PasswordInput(attrs = {
+			'placeholder': 'New-Password',	
+		}),		
+	)
+	rePwd = forms.CharField(
+		required = True,
+		label = u"Re Passwrd",
+		error_messages = {'required': u'Please input new password again.'},
+		widget = forms.PasswordInput(attrs = {
+			'placeholder': 'New-Password',	
+		}),		
 	)
 
 

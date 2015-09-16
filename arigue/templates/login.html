@@ -54,9 +54,9 @@
              {% endfor %}
 
               {% if uf.errors %}
-                    <div class="alert alert-warning alert-dismissable" role="alert">
-                    Username or Password Error !  
+                    <div class="alert alert-danger alert-dismissable" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    Username or Password Error !  
                     </div>
               {% endif %}
 
@@ -69,8 +69,13 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
   
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script type="text/javascript" src="/static/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/ie-emulation-modes-warning.js"></script>
 
 </body></html>
