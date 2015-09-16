@@ -5,8 +5,19 @@ from django.contrib import auth
 from django.core.paginator import Paginator
 from arigue.models import *
 from django import forms
-
 import os
+
+
+# view for modify user password
+def setting(request):
+	if request.method == 'POST':
+		chForm = ChpwdForm(request.POST)
+		if chform.is_valid():
+			username = request.session.get('username', 'None')
+			# oldPwd =  
+	else:
+		chform = ChpwdForm()	
+	return render_to_response()
 
 
 # view for test
