@@ -4,20 +4,28 @@ from django.template import loader
 from django.contrib import auth
 from django.core.paginator import Paginator
 from arigue.models import *
-from django import forms
+from arigue.form import UserForm, ChpwdForm
 import os
 
 
 # view for modify user password
 def setting(request):
 	if request.method == 'POST':
-		chForm = ChpwdForm(request.POST)
-		if chform.is_valid():
+		pwdForm = ChpwdForm(request.POST)
+		if pwdForm.is_valid():
 			username = request.session.get('username', 'None')
-			# oldPwd =  
+            oldPwd = request.POST.get('oldPwd', '')
+            user = auth.authenticate(username=username, password=oldPwd)
+            if user is not None and user.is_active:
+                newPwd = request.POST.get('newPwd', '')
+                user.set_password(newPwd)
+                user.save()
+                return render_to_response('', {})
+            else:
+                return render_to_response('', )
 	else:
-		chform = ChpwdForm()	
-	return render_to_response()
+		pwdForm = ChpwdForm()
+    return render_to_response()
 
 
 # view for test
@@ -47,7 +55,6 @@ def homepage(request):
 
 
 # profile view
-# Kallen Ding, Agu 31 2015
 def profile(request):
 	if request.method == 'POST':
 		uf = UserForm(request.POST)
@@ -149,54 +156,7 @@ def server(request):
 	return render_to_response('server.html', {'perPage': perPage, 'username': username})
 
 
-# Define UserForm model
-class UserForm(forms.Form):
-	username = forms.CharField(
-		required = True,
-		error_messages = {'required': u'Please input username.'},
-		widget = forms.TextInput(attrs={
-			'class': 'form-control',
-			'placeholder': 'Username'
-		})
-	)
-	# username = forms.CharField(widget=forms.TextInput)
-	password = forms.CharField(
-		widget = forms.PasswordInput(attrs={
-			'class': 'form-control',
-			'placeholder': 'Password'
-		})
-	)
-
-
-# Define ChpwdForm Model
-class ChpwdForm(forms.Form):
-	oldPwd = forms.CharField(
-		required = True,
-		label = u"Old Password",
-		error_messages = {'required': u'Please input old password.'},
-		widget = forms.PasswordInput(attrs = {
-			'placeholder': 'Old-Password',	
-		}), 		
-	)
-	newPwd = forms.CharField(
-		required = True,
-		label = u"New Passwrd",
-		error_messages = {'required': u'Please input new password.'},
-		widget = forms.PasswordInput(attrs = {
-			'placeholder': 'New-Password',	
-		}),		
-	)
-	rePwd = forms.CharField(
-		required = True,
-		label = u"Re Passwrd",
-		error_messages = {'required': u'Please input new password again.'},
-		widget = forms.PasswordInput(attrs = {
-			'placeholder': 'New-Password',	
-		}),		
-	)
-
-
-# Use md5 to screct the user's password
+# Use md5 to secret user's password
 # Just import the md5 module of python.
 def md5(string):
 	import hashlib
