@@ -21,4 +21,6 @@ urlpatterns = [
 	# login and logout	
 	url(r'^login', login),
 	url(r'^logout', logout),
+	
+	url(r'^setting/$', setting),
 ]

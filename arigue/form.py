@@ -22,7 +22,7 @@ class UserForm(forms.Form):
 
 
 # Define ChpwdForm Model
-class ChpwdForm(forms.Form):
+class PwdForm(forms.Form):
 	oldPwd = forms.CharField(
 		required = True,
 		label = u"Old Password",
@@ -49,28 +49,13 @@ class ChpwdForm(forms.Form):
 			'placeholder': 'New-Password',
 		}),
 	)
-
-    def clean(self):
-        if not self.is_valid():
-            raise forms.ValidationError(u"Please input all items.")
-        elif self.cleaned_data['newPwd'] <> self.cleaned_data['rePwd']:
-            raise forms.ValidationError(u"Confirm your password.")
-        else:
-            cleaned_data = super(ChpwdForm, self).clean()
-        return cleaned_data
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	def clean(self):
+		if not self.is_valid():
+			raise forms.ValidationError(u"Please input all items.")
+		elif self.cleaned_data['newPwd'] <> self.cleaned_data['rePwd']:
+			raise forms.ValidationError(u"Confirm your password.")
+		else:
+			cleaned_data = super(ChpwdForm, self).clean()
+		return cleaned_data
 
