@@ -1,9 +1,12 @@
 from django.conf.urls import include, url
+from django.conf import settings
 from django.contrib import admin
 from arigue.views import *
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+	url(r'^upload/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
+
+	url(r'^admin/', include(admin.site.urls)),
 	
 	url(r'^index/', index),
 	url(r'^$', login),
