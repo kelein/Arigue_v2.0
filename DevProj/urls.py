@@ -26,4 +26,6 @@ urlpatterns = [
 	url(r'^logout', logout),
 	
 	url(r'^setting/$', setting),
+
+	url(r'^getUser/$', getUser),
 ]

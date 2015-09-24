@@ -12,9 +12,6 @@ class Server(models.Model):
 	mem_total = models.IntegerField() 
 	mem_free = models.IntegerField() 
 	
-	# def __unicode__(self):
-	#	return self.ipaddr
-	
 	def __str__(self):
 		return '%s, %s' % (self.hostname, self.ipaddr)
 

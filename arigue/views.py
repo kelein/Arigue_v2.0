@@ -8,6 +8,11 @@ from arigue.form import *
 import os
 
 
+def getUser(request):
+	username = request.session.get('username', 'None')
+	users = Profile.objects.all()
+	return render_to_response('users.html', {'users': users, 'username': username})
+
 # view for modify user password
 # def setting(request):
 # 	if request.method == 'POST':

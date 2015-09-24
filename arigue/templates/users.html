@@ -1,0 +1,43 @@
+su{% extends 'base.html'%}
+
+{% block title %} User {% endblock %}
+
+{% block username %} {{ username }} {% endblock %}
+
+{% block page-content %}
+
+<ol class="breadcrumb">
+<li><a href="#">Home</a></li>
+<li><a href="#">User</a></li>
+</ol>
+
+<h1 class="page-header">User Manager</h1>
+
+ <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Job</th>
+                  <th>Jobstate</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for user in users %}
+              {% if forloop.counter0|divisibleby:2 %}
+            	<tr class="">
+            	{% else %}
+            	<tr class="warning">
+            	{% endif %}
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.job }}</td>
+                  <td>{{ user.jobstate }}</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+</div>
+
+{% endblock %}
