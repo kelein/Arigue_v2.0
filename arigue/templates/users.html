@@ -6,10 +6,10 @@ su{% extends 'base.html'%}
 
 {% block page-content %}
 
-<ol class="breadcrumb">
+<!-- <ol class="breadcrumb">
 <li><a href="#">Home</a></li>
 <li><a href="#">User</a></li>
-</ol>
+</ol> -->
 
 <h1 class="page-header">User Manager</h1>
 
@@ -28,7 +28,7 @@ su{% extends 'base.html'%}
               {% if forloop.counter0|divisibleby:2 %}
             	<tr class="">
             	{% else %}
-            	<tr class="warning">
+            	<tr class="">
             	{% endif %}
                   <td>{{ user.username }}</td>
                   <td>{{ user.email }}</td>
