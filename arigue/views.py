@@ -113,10 +113,10 @@ def login(request):
 			md5pwd = md5(password)
 			print username, md5pwd
 			user = Profile.objects.filter(username__exact=username, password__exact=md5pwd)
-  			if user:
+			if user:
 				request.session['username'] = username
 				return HttpResponseRedirect('/index/')
-  	else:
+	else:
 		uf = UserForm()
 	return render_to_response('login.html', {'uf': uf})		
 
@@ -137,7 +137,7 @@ def dashboard(request):
 
 # Server manager view
 def server(request):
-  	username = request.session.get('username', 'None')
+	username = request.session.get('username', 'None')
 	t = loader.get_template('server.html')
 	# Get all objects in model Server
 	allServers = Server.objects.all()
@@ -151,7 +151,7 @@ def server(request):
 
 	# ## Exception Solutino ##	
 	try:
-  		pageIndex = int(request.GET.get('page', '1'))
+		pageIndex = int(request.GET.get('page', '1'))
 		print "Page Index: %s" % pageIndex
 	except ValueError:
 		pageIndex = 1
